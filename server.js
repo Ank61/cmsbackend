@@ -13,7 +13,7 @@ app.use(bodyparser.urlencoded({limit: '50mb', extended: true}));
 // allowedHeaders: ['Content-Type', 'Authorization', 'x-csrf-token'],
 // exposedHeaders: ['Content-Range', 'X-Content-Range'],
 // credentials: true}))
-app.use(cors()) 
+app.use(cors({ origin: '*'})) 
 const MONGO_KEY = process.env.MONGO_URL
 
 mongoose.connect(MONGO_KEY).then((res) => {
