@@ -13,9 +13,11 @@ app.use(bodyparser.urlencoded({limit: '50mb', extended: true}));
 // allowedHeaders: ['Content-Type', 'Authorization', 'x-csrf-token'],
 // exposedHeaders: ['Content-Range', 'X-Content-Range'],
 // credentials: true}))
-app.use(cors({ origin: '*'})) 
+app.use(cors({
+    origin: 'https://amazing-fox-a1fa2c.netlify.app'
+  })) 
 const MONGO_KEY = process.env.MONGO_URL
-
+app.use(express.json());
 mongoose.connect(MONGO_KEY).then((res) => {
     console.log('Database connected successfully',)
 }).catch((error) => {
