@@ -159,7 +159,6 @@ app.post("/createModule",
         try{
             const allData = request.body;
             const toString = allData.join(", ");
-        console.log(toString)
             await aboutUsModal.findOneAndUpdate(
                 {'_id' :'642521483a2c6109b4aabbb4' },
                 { $push: { formData: `${toString}`}},

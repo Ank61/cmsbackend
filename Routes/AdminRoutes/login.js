@@ -71,7 +71,6 @@ app.post("/",
         const user = await loginModal.findOne({ Email: email }).clone().catch(err=> response.status(400).send({ login: "Could not find Email" }))
         if (user) {
             const hashedPassword = user.Password;
-            console.log(password, hashedPassword)
             bcrypt.compare(password, hashedPassword, async function (err, result) {
                 if (err) {
                     // Handle error
