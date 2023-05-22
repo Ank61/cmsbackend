@@ -14,9 +14,9 @@ app.use(bodyparser.urlencoded({limit: '50mb', extended: true}));
 // exposedHeaders: ['Content-Range', 'X-Content-Range'],
 // credentials: true}))
 app.use(cors()) 
-const MONGO_KEY = process.env.MONGO_URL
+const MONGO_KEY = process.env.MONGO_URL;
 app.use(express.json());
-mongoose.connect(MONGO_KEY).then((res) => {
+mongoose.connect(MONGO_KEY, { useNewUrlParser: true, useUnifiedTopology: true }).then((res) => {
     console.log('Database connected successfully',)
 }).catch((error) => {
     console.log("Error occured while connecting",error)
@@ -33,6 +33,8 @@ let emptyEdit = require("./Routes/AdminRoutes/emptyEdit")
 let deletePage = require("./Routes/NewPage/deletePage")
 let newModule =require("./Routes/NewPage/newModule")
 let update = require("./Routes/NewPage/updatePage")
+let deleleDashboard = require("./Routes/NewPage/deletePage")
+let editDashboard =require("./Routes/UserRoutes/editDashboard")
 app.use("/login" , login)
 app.use("/aboutUs" , mission)
 app.use("/header" , header)
@@ -44,6 +46,8 @@ app.use("/editPage",emptyEdit)
 app.use("/deleteDynamic",deletePage)
 app.use("/newModule",newModule)
 app.use("/update", update)
+app.use("/delete",deleleDashboard)
+app.use("/edit",editDashboard)
 // app.use("/home" , homePage)
 app.use(express.static(path.join(__dirname, '../build')))
 app.get('*', (req, res) => {

@@ -37,16 +37,13 @@ const newSchema =   schema({
 
 app.post("/", async (request, response) => {
     try {
-        const moduleId = request.body.moduleId;
-        const collectionName = request.body.collectionName;
-        const newPage = mongoose.model(collectionName, newSchema)
-        const result = await newPage.findOneAndUpdate({},
-            { $pull: { Modules: { moduleId: moduleId } } },
-            { new: true }).exec();
-        return response.status(200).send(result)
-    }
+      console.log(request.body.collectionName)
+      const collectionName = request.body.collectionName;
+      await mongoose.connection.db.dropCollection(collectionName);
+      return response.status(200).send("Collection deleted successfully");
+    } 
     catch (err) {
-        return response.status(400).send(err)
+      return response.status(400).send(err);
     }
-});
+  });
 module.exports = app;
